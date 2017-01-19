@@ -1,0 +1,22 @@
+
+
+<import src="../../widget/component/component_1.wxml" />
+
+<view class="root">
+	<view class="block">
+		Welcome
+	</view>
+
+	<view class="block">
+		Root Data: {{ rootData }}
+	</view>
+
+	<view class="block">
+		<template is="component1" data="{{...child1}}"></template>
+	</view>
+
+	<view class="block block-click" bindtap="Component1_Data3_Plus">
+		传递给组件1的passToChild值为: {{ passToChild }}，点击自增
+	</view>
+
+</view>

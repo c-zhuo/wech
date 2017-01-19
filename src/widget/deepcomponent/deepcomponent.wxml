@@ -1,0 +1,3 @@
+<template name="cc">
+    <view class="cc" bindtap="{{ ccEvent2 }}">{{ ccData }}_{{ ccData2 }}</view>
+</template>

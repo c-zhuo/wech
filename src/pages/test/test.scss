@@ -1,0 +1,17 @@
+@import "../../widget/component/component_1.scss";
+
+.block {
+	display: block;
+	padding: 5rpx;
+	font-size: 24rpx;
+
+    &-click {
+    	border: 1px solid #666;
+    	padding: 30rpx;
+    	text-align: center;
+    	margin: 20rpx;
+    	background-color: #2bb2a3;
+    	border-radius: 6rpx;
+    	color: white;
+    }
+}
