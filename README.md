@@ -7,7 +7,9 @@
 1.引入widget.js
 
 2.开发组件时，组件的config包一层之后再exports：
+
 ```
+
 import wech from 'wech';
 
 var yourConfig = {
@@ -24,12 +26,15 @@ var yourConfig = {
 };
 
 module.exports = wech(yourConfig);
+
 ```
 
 其中，可以通过 this.data.district / this.yourComponentMethod 访问组件内部的数据和方法，通过 this.setData 更新组件内部的数据，通过 this.$emit('eventName', data) 向外传递事件。模版中可以通过<view bindtap="{{ yourComponentEvent }}">来触发组件内部方法，防止全局事件名污染。
 
 3.引入组件时，通过install／addTo方法。install用于将组件挂载到页面，addTo用于将组件作为子组件，挂载到另一个组件内部
+
 ```
+
 var pageConfig = { 微信页面配置 };
 
 child1.install(pageConfig, {
@@ -52,6 +57,7 @@ child1.install(pageConfig, {
 });
 
 Page(blabla);
+
 ```
 
 addTo同理。
