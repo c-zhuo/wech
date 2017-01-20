@@ -1,5 +1,7 @@
 # WECH (Wechat Component Helper)
 
+## 微信小程序模块化组件开发Helper
+
 极轻量的微信小程序模块化组件开发helper，没有任何构建相关的骨架或者约束。只是通过getter、setter帮助开发者能够以“模块化”的方式将小程序页面剥离成一个个组件。
 
 ### 使用方式
