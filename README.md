@@ -10,7 +10,7 @@
 
 ```
 
-import wech from 'wech';
+import wech from 'yourPath/widget.js'; // 可以npm引入的话import wech from 'wech'
 
 var yourConfig = {
     data: {
@@ -60,7 +60,26 @@ Page(blabla);
 
 ```
 
-addTo同理。
+addTo同理，如下：
+
+```
+
+import wech from 'yourPath/widget.js';
+
+import grandson from 'your Grand Component';
+
+var conf = {}; // 子组件
+
+grandson.addTo(conf, {
+    scope: 'grandson',
+    static: {},
+    props: {},
+    events: {},
+});
+
+module.exports = widget(conf);
+
+```
 
 ### 关于css和wxml
 
