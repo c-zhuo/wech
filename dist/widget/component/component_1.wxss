@@ -12,10 +12,9 @@
     margin: 5rpx 0;
     display: block; }
   .component1-click {
-    border: 1px solid #666;
     padding: 30rpx;
     text-align: center;
     margin: 20rpx;
-    background-color: #2bb2a3;
+    background-color: #118bfb;
     border-radius: 6rpx;
     color: white; }

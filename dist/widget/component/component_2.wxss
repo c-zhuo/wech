@@ -1,24 +1,3 @@
-.component1 {
-  padding: 40rpx;
-  background-color: #f3f3f3;
-  border: 1px solid black;
-  font-size: 25rpx; }
-  .component1-title {
-    margin: 15rpx 0;
-    font-size: 35rpx;
-    text-align: center;
-    display: block; }
-  .component1-content {
-    margin: 5rpx 0;
-    display: block; }
-  .component1-click {
-    padding: 30rpx;
-    text-align: center;
-    margin: 20rpx;
-    background-color: #118bfb;
-    border-radius: 6rpx;
-    color: white; }
-
 .deep {
   padding: 40rpx;
   background-color: #e6e6e6;
@@ -60,22 +39,3 @@
     background-color: #118bfb;
     border-radius: 6rpx;
     color: white; }
-
-page {
-  background-color: white; }
-
-.block {
-  display: block;
-  padding: 5rpx;
-  font-size: 24rpx; }
-  .block-click {
-    padding: 30rpx;
-    text-align: center;
-    margin: 20rpx;
-    background-color: #118bfb;
-    border-radius: 6rpx;
-    color: white; }
-  .block-line {
-    width: 100%;
-    border-bottom: 1px solid #e8e8e8;
-    margin: 20rpx 0; }

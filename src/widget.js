@@ -164,7 +164,7 @@ const CORE = function (componentConf) {
 
             // bind private WXML events
             for (var i in componentConf.events) {
-                let realEventName = '__Scope_Events__' + $scope + '_' + i + '__' + Math.random().toFixed(5) * 10000;
+                let realEventName = '__Scope_Events__' + $scope + '_' + i + '__' + dist.methodScopeIndex++;
                 _config.data[$scope][i] = realEventName;
                 _config[realEventName] = componentConf.events[i].bind(componentConf);
             }
@@ -248,14 +248,16 @@ const CORE = function (componentConf) {
             componentConf.setData = componentConf.$setData;
 
             for (var i in componentConf.events) {
-                let realEventName = '__Scope_Events__' + $scope + '_' + i + '__' + Math.random().toFixed(5) * 10000;
+                let realEventName = '__Scope_Events__' + $scope + '_' + i + '__' + dist.methodScopeIndex++;
                 _config.data[$scope][i] = realEventName;
                 if (!_config.$addEvents) {
                     _config.$addEvents = {};
                 }
                 _config.$addEvents[realEventName] = componentConf.events[i].bind(componentConf);
             }
-        }
+        },
+
+        methodScopeIndex: 0
     };
 
     return dist;

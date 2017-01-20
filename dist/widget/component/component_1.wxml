@@ -1,8 +1,6 @@
 <template name="component1">
-    <!-- <import src="../../widget/deepcomponnet/deepcomponent.wxml" />
-    <template is="cc" data="{{ ...cc }}"/> -->
     <view class="component1">
-        <view class="component1-title">组件1</view>
+        <view class="component1-title">组件1 父子组件数据绑定、事件传递demo</view>
         <view class="component1-content">Data1: {{ c1_Data1 }}</view>
         <view class="component1-content">Data2: {{ c1_Data2 }}</view>
         <view class="component1-content">Data3: {{ c1_Data3 }}</view>

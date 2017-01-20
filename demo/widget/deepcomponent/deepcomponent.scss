@@ -1,6 +1,6 @@
-.component1 {
+.deep {
     padding: 40rpx;
-    background-color: #f3f3f3;
+    background-color: #e6e6e6;
     border: 1px solid black;
     font-size: 25rpx;
 
@@ -17,11 +17,10 @@
     }
 
     &-click {
-    	border: 1px solid #666;
     	padding: 30rpx;
     	text-align: center;
     	margin: 20rpx;
-    	background-color: #2bb2a3;
+    	background-color: #118bfb;
     	border-radius: 6rpx;
     	color: white;
     }

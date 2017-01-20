@@ -1,0 +1,9 @@
+<import src="../../widget/deepcomponent/deepcomponent.wxml" />
+
+<template name="component2">
+    <view class="component2">
+        <view class="component2-title">组件2 组件嵌套demo</view>
+        <view class="component1-content">透传c2_Data: {{ c2_Data }}</view>
+    	<template is="grandson" data="{{ ...grandson }}"/>
+    </view>
+</template>

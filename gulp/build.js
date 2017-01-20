@@ -40,13 +40,13 @@ module.exports = function (gulp) {
         var f = filter(function (chunk) {
             var chunkPath = chunk.path;
             var wxmlPath = chunkPath.substring(0, chunkPath.length - 4) + 'wxml';
-            if (fs.existsSync(wxmlPath) || chunkPath.match('/src/app.scss')) {
+            if (fs.existsSync(wxmlPath) || chunkPath.match('/demo/app.scss')) {
                 return true;
             } else {
                 return false;
             }
         });
-        gulp.src('./src/**/*.scss')
+        gulp.src('./demo/**/*.scss')
             .pipe(f)
             .pipe(sass.sync({
                     outputStyle: process.env.NODE_ENV === 'production' ? 'compressed' : ''
@@ -54,7 +54,6 @@ module.exports = function (gulp) {
             .on('error', sass.logError))
             .pipe(gulp.dest(DIST_PATH))
             .on('end', cb);
-        // webpack(require('../webpack.config.js'), cb);
     });
 
     gulp.task('wxss', ['sass'], function () {
@@ -81,7 +80,7 @@ module.exports = function (gulp) {
     });
 
     gulp.task('copy-dir', function (cb) {
-        copydir.sync('./src', DIST_PATH);
+        copydir.sync('./demo', DIST_PATH);
         cb();
     });
 

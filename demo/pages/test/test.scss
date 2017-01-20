@@ -1,4 +1,9 @@
 @import "../../widget/component/component_1.scss";
+@import "../../widget/component/component_2.scss";
+
+page {
+	background-color: white;
+}
 
 .block {
 	display: block;
@@ -6,12 +11,17 @@
 	font-size: 24rpx;
 
     &-click {
-    	border: 1px solid #666;
     	padding: 30rpx;
     	text-align: center;
     	margin: 20rpx;
-    	background-color: #2bb2a3;
+    	background-color: #118bfb;
     	border-radius: 6rpx;
     	color: white;
+    }
+
+    &-line {
+    	width: 100%;
+    	border-bottom: 1px solid #e8e8e8;
+    	margin: 20rpx 0;
     }
 }
