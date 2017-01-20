@@ -26,7 +26,7 @@
 
 import wech from 'yourPath/widget.js'; // 可以npm引入的话import wech from 'wech'
 
-var yourConfig = {
+const yourConfig = {
     data: {
         district: '',
     },
@@ -49,7 +49,8 @@ module.exports = wech(yourConfig);
 
 ```
 
-var pageConfig = { 微信页面配置 };
+import child1 from 'child1';
+const pageConfig = { 微信页面配置 };
 
 child1.install(pageConfig, {
     scope: '这里的名字需要和<template is="component1" data="{{...scope1}}"></template>里面的scope1相符',
