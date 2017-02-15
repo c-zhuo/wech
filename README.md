@@ -8,13 +8,15 @@
 
 ### 查看demo
 
-1.clone this repo
+dist目录可以直接绑定为小程序开发目录。
 
-2.npm install / yarn
+demo目录只是支持了scss，使用方法：
 
-3.npm run dev
+1.npm install / yarn
 
-4.生成的dist绑定为小程序开发目录
+2.npm run dev
+
+3.生成的dist绑定为小程序开发目录，修改demo目录会动态更新dist
 
 备注：WECH并不要求必须使用demo中的构建方式，这只是个演示。
 

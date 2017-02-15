@@ -1,6 +1,6 @@
 /**
  *  模块化组件maker
- *  Version 0.0.1
+ *  Version 0.1.0
  */
 
 const CORE = function (componentConf) {
@@ -30,12 +30,7 @@ const CORE = function (componentConf) {
     };
 
     /**
-     *  将组件的methods里面的方法挂到最外面，否则template里的找不到事件（bindtap等）
-     *
-     *  备注：
-     *      先触发页面的生命周期钩子，再触发组件的生命周期钩子
-     *      Vue的方式是 $parent.created -> $child.created -> $child.ready -> $parent.ready
-     *      但是官方demo没有created状态，所以只好先按照 $parent.onLoad -> $child.onLoad
+     *  将组件的methods里面的方法挂到组件外层（不是page外层），否则template里的找不到事件（bindtap等）
      */
 
     for (let i in componentConf.methods) {
