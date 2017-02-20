@@ -1,8 +1,0 @@
-<template name="grandson">
-    <view class="deep">
-        <view class="deep-title">组件2的子组件</view>
-        <view class="deep-content">grandData1: {{ grandData1 }}</view>
-        <view class="deep-content">grandData2: {{ grandData2 }}</view>
-        <view class="deep-click" bindtap="{{ data2Plus }}">Data2自增1（内部调用）</view>
-    </view>
-</template>

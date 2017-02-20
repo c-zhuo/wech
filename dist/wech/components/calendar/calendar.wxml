@@ -1,0 +1,39 @@
+<template name="wech_calendar">
+	<view class="wech_cal-box">
+		<view class="wech_cal-toper wech_cal-flex">
+		    <view class="wech_cal-flex-item wech_cal-toper-item wech_cal-weekcolor">日</view>
+		    <view class="wech_cal-flex-item wech_cal-toper-item" wx:for="一二三四五" wx:for-item="item">{{ item }}</view>
+		    <view class="wech_cal-flex-item wech_cal-toper-item wech_cal-weekcolor">六</view>
+		</view>
+		<view class="wech_cal-current wech_cal-month-line">
+			{{ currentYear }}年{{ currentMonth + 1 }}月
+		</view>
+
+		<view class="wech_cal-body">
+			<view class="wech_cal-top-paddings"></view>
+
+			<view class="wech_cal-month-group"
+				wx:for="{{ calendar }}"
+				wx:key="index"
+				wx:for-item="item">
+				<view class="wech_cal-month-line">
+					<text wx:if="{{index + firstMonth >= 12}}">{{ currentYear + 1 }}</text><text wx:else>{{ currentYear }}</text>年{{ (index + firstMonth) % 12 + 1 }}月
+				</view>
+				<view class="wech_cal-month-days">
+				<view class="wech_cal-date {{ ((cell.date >= chosenStart && cell.date <= chosenEnd) || cell.date == chosenStart) && chosenStart ? 'wech_cal-colored' : '' }}"
+					wx:for="{{ item }}"
+					wx:for-item="cell"
+					wx:key="date"
+					data-date="{{ cell.date }}"
+					bindtap="{{ clickDate }}">
+					<view class="wech_cal-date-top {{ ((cell.date >= chosenStart && cell.date <= chosenEnd) || cell.date == chosenStart) && chosenStart ? 'wech_cal-colored-top' : '' }}">{{ cell.text }}</view>
+					<view wx:if="{{ cell.date }}" class="wech_cal-date-bottom">
+						<text wx:if="{{ cell.date == chosenStart }}">{{ startText }}</text>
+						<text wx:elif="{{ cell.date == chosenEnd }}">{{ endText }}</text>
+					</view>
+				</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>

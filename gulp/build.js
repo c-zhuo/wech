@@ -36,6 +36,28 @@ module.exports = function (gulp) {
         cb();
     });
 
+    gulp.task('wech-sass', function (cb) {
+        var f = filter(function (chunk) {
+            var chunkPath = chunk.path;
+            var wxmlPath = chunkPath.substring(0, chunkPath.length - 4) + 'wxml';
+            if (fs.existsSync(wxmlPath)) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+        gulp.src('./src/**/*.scss')
+            .pipe(f)
+            .pipe(sass.sync({
+                    outputStyle: 'compressed'
+                })
+            .on('error', sass.logError))
+            .pipe(gulp.dest(function(file) {
+                return file.base;
+            }))
+            .on('end', cb);
+    });
+
     gulp.task('sass', function (cb) {
         var f = filter(function (chunk) {
             var chunkPath = chunk.path;
@@ -56,7 +78,24 @@ module.exports = function (gulp) {
             .on('end', cb);
     });
 
-    gulp.task('wxss', ['sass'], function () {
+    gulp.task('wech-css2wxss', ['sass'], function () {
+        var fileList = [];
+        walk(fileList, './src');
+        fileList.forEach(function (filePath) {
+            if (filePath.match(/\.scss$/)) {
+                // fs.unlinkSync(filePath);
+            } else if (filePath.match(/\.css$/)) {
+                // 判断是否存在对应的wxml文件，如果不存在，则可以移除当前css文件
+                if (fileList.indexOf(filePath.substring(0, filePath.length - 3) + 'wxml') === -1) {
+                    // fs.unlinkSync(filePath);
+                } else {
+                    fs.rename(filePath, filePath.substring(0, filePath.length - 3) + 'wxss');
+                }
+            }
+        });
+    });
+
+    gulp.task('css2wxss', ['sass'], function () {
         var fileList = [];
         walk(fileList, DIST_PATH);
         fileList.forEach(function (filePath) {
@@ -81,6 +120,7 @@ module.exports = function (gulp) {
 
     gulp.task('copy-dir', function (cb) {
         copydir.sync('./demo', DIST_PATH);
+        copydir.sync('./src', DIST_PATH + '/wech');
         cb();
     });
 
@@ -113,7 +153,11 @@ module.exports = function (gulp) {
         cb();
     });
 
-    gulp.task('build', ['cl', 'copy-dir', 'set-entrance', 'sass', 'wxss'], function (cb) {
+    gulp.task('build', ['cl', 'copy-dir', 'set-entrance', 'sass', 'css2wxss'], function (cb) {
+        cb();
+    });
+
+    gulp.task('wech', ['wech-sass', 'wech-css2wxss'], function (cb) {
         cb();
     });
 
