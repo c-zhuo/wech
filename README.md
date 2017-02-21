@@ -2,8 +2,8 @@
 
 ## 微信小程序模块化组件开发“框架”
 
-![./screenshots/1.png](./screenshots/1.png)
-![./screenshots/2.png](./screenshots/2.png)
+![https://raw.githubusercontent.com/chenzhuo1992/wech/master/screenshots/1.png](https://raw.githubusercontent.com/chenzhuo1992/wech/master/screenshots/1.png)
+![https://raw.githubusercontent.com/chenzhuo1992/wech/master/screenshots/2.png](https://raw.githubusercontent.com/chenzhuo1992/wech/master/screenshots/2.png)
 
 极轻量（4kb）的微信小程序模块化组件开发工具，没有任何构建相关的骨架或者约束。在运行阶段自动通过getter/setter，将你的“模块化组件”的数据和方法的映射到小程序的实际页面。支持组件嵌套、防止方法名污染、单向数据绑定。
 
