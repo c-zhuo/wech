@@ -1,16 +1,8 @@
-@import "../../wech/components/calendar/calendar.wxss";
+@import "../../wech/components/mask/mask.wxss";
 
 page {
 	background-color: white;
     font-size: 30rpx;
-}
-
-.demo-part {
-	display: block;
-	margin: 5rpx 0;
-    width: 100%;
-	height: 700rpx;
-    position: relative;
 }
 
 .button {

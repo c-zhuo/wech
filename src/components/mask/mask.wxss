@@ -1,0 +1,1 @@
+.wech_mask{position:fixed;pointer-events:none;top:0;height:100%;left:0;width:100%;opacity:0;background:black;transition:opacity .2s linear}.wech_mask-visible{pointer-events:initial;z-index:10;display:block;opacity:.5}

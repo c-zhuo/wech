@@ -1,0 +1,21 @@
+$color-primary: #06c1ae;
+$color-border: #eee;
+
+.wech_mask {
+    position: fixed;
+    pointer-events: none;
+    top: 0;
+    height: 100%;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    background: black;
+    transition: opacity .2s linear;
+
+    &-visible {
+        pointer-events: initial;
+        z-index: 10;
+        display: block;
+        opacity: .5;
+    }
+}

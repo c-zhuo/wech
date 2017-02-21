@@ -1,15 +1,8 @@
 // 微信页面配置
 let pageConfig = {
     data: {
-        calendarVisible: false,
         calendarType: 1,
         calendarChosen: '数据单向绑定'
-    },
-
-    showCalendar () {
-        this.setData({
-            calendarVisible: true
-        });
     },
 
     calendarTypeChange () {

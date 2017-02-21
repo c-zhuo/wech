@@ -71,10 +71,7 @@ const conf = {
             this.$emit('finish', {
                 start: Number(this.data.chosenStart),
                 end: Number(this.data.chosenEnd),
-            })
-            setTimeout(function () {
-                wx.navigateBack();
-            }, 100);
+            });
         },
     },
 
@@ -137,9 +134,6 @@ const conf = {
 
     onLoad: function (options) {
         this.data.backUrl = options.back;
-
-        // this.data.chosenStart = Number(options.checkInTime || options.checkinTime);
-        // this.data.chosenEnd = Number(options.checkOutTime || options.checkoutTime);
 
         this.data.chosenStart = new Date(this.data.chosenStart).setHours(0);
         this.data.chosenEnd = new Date(this.data.chosenEnd).setHours(0);

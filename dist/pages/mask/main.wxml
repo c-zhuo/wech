@@ -1,0 +1,8 @@
+<import src="../../wech/components/mask/mask.wxml" />
+
+<view class="root">
+	<view class="block">
+		<view class="button" bindtap="showMask">展示mask</view>
+	</view>
+	<template is="wech_mask" data="{{ ...mask }}"/>
+</view>

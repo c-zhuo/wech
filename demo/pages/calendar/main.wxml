@@ -1,7 +1,7 @@
 <import src="../../wech/components/calendar/calendar.wxml" />
 
 <view class="root">
-	<view bindtap="showCalendar" class="block">
+	<view class="block">
 		<text>{{ calendarType === 1 ? '多日' : '单日' }}日历 </text>
 		<text> {{ calendarChosen }}</text>
 		<view class="button" bindtap="calendarTypeChange">点击切换单／多天</view>

@@ -1,6 +1,8 @@
 {
   "pages":[
-    "pages/main/main"
+    "pages/index/main",
+    "pages/calendar/main",
+    "pages/mask/main"
   ],
   "window":{
     "backgroundTextStyle":"light",

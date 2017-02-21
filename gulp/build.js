@@ -53,6 +53,7 @@ module.exports = function (gulp) {
                 })
             .on('error', sass.logError))
             .pipe(gulp.dest(function(file) {
+                console.log(file.path);
                 return file.base;
             }))
             .on('end', cb);
@@ -83,13 +84,21 @@ module.exports = function (gulp) {
         walk(fileList, './src');
         fileList.forEach(function (filePath) {
             if (filePath.match(/\.scss$/)) {
-                // fs.unlinkSync(filePath);
-            } else if (filePath.match(/\.css$/)) {
+                var oldWxss = filePath.substring(0, filePath.length - 4) + 'wxss';
+                if (fs.existsSync(oldWxss)) {
+                    fs.unlinkSync(oldWxss);
+                }
+            }
+        });
+        fileList = [];
+        walk(fileList, './src');
+        fileList.forEach(function (filePath) {
+            if (filePath.match(/\.css$/)) {
                 // 判断是否存在对应的wxml文件，如果不存在，则可以移除当前css文件
                 if (fileList.indexOf(filePath.substring(0, filePath.length - 3) + 'wxml') === -1) {
                     // fs.unlinkSync(filePath);
                 } else {
-                    fs.rename(filePath, filePath.substring(0, filePath.length - 3) + 'wxss');
+                    fs.renameSync(filePath, filePath.substring(0, filePath.length - 3) + 'wxss');
                 }
             }
         });
@@ -157,7 +166,8 @@ module.exports = function (gulp) {
         cb();
     });
 
-    gulp.task('wech', ['wech-sass', 'wech-css2wxss'], function (cb) {
+    gulp.task('wech', ['wech-sass'], function (cb) {
+        gulp.run('wech-css2wxss');
         cb();
     });
 
