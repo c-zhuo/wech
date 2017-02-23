@@ -1,0 +1,8 @@
+<import src="../mask/mask.wxml" />
+
+<template name="wech_alert">
+    <template is="wech_mask" data="{{ ...wech_mask4alert }}"/>
+    <view style="z-index: {{ zIndex ? zIndex + 10 : 10000 }}" class="wech_alert" wx:if="{{ visible }}">
+        <text class="wech_alert-text">{{ text }}</text>
+    </view>
+</template>

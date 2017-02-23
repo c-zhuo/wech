@@ -2,7 +2,7 @@
   "pages":[
     "pages/index/main",
     "pages/calendar/main",
-    "pages/mask/main"
+    "pages/masks/main"
   ],
   "window":{
     "backgroundTextStyle":"light",

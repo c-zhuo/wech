@@ -11,7 +11,7 @@ let pageConfig = {
     },
     goMask () {
         wx.navigateTo({
-            url: '/pages/mask/main'
+            url: '/pages/masks/main'
         });
     }
 };

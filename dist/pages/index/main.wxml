@@ -1,8 +1,8 @@
 <view class="root">
-	<view bindtap="goCalendar" class="block">
-		前往日历
-	</view>
-	<view bindtap="goMask" class="block">
-		前往mask
-	</view>
+    <view bindtap="goCalendar" class="block">
+        前往日历
+    </view>
+    <view bindtap="goMask" class="block">
+        前往mask
+    </view>
 </view>

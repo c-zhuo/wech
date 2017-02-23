@@ -1,4 +1,5 @@
 @import "../../wech/components/mask/mask.wxss";
+@import "../../wech/components/alert/alert.wxss";
 
 page {
 	background-color: white;

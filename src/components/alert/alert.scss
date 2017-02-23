@@ -1,0 +1,17 @@
+@import "../mask/mask.wxss";
+
+.wech_alert {
+    position: fixed;
+    pointer-events: none;
+    top: 50%;
+    left: 50%;
+    width: 300rpx;
+    margin: -60rpx 0 0 -170rpx;
+    background: black;
+    color: white;
+    text-align: center;
+    line-height: 38rpx;
+    font-size: 32rpx;
+    padding: 20rpx;
+    border-radius: 8rpx;
+}

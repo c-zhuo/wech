@@ -1,3 +1,3 @@
 <template name="wech_mask">
-	<view style="z-index: {{ zIndex }}" class="wech_mask {{ visible ? 'wech_mask-visible' : '' }}" bindtap="{{ originClickingMask }}"></view>
+	<view style="z-index: {{ zIndex ? zIndex : 9999 }}" class="wech_mask {{ visible ? 'wech_mask-visible' : '' }}" bindtap="{{ originClickingMask }}"></view>
 </template>

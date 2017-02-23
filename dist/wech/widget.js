@@ -103,6 +103,7 @@ const CORE = function (componentConf) {
 
             for (var i in $props) {
                 (function (j) {
+                    // 父页面向一级组件传递初始化属性
                     if (componentConf.$this) {
                         componentConf.data[j] = $props[j].apply(componentConf.$this, arguments);
                     } else {
@@ -186,19 +187,13 @@ const CORE = function (componentConf) {
 
             for (var i in $props) {
                 (function (j) {
-                    if (componentConf.$this) {
-                        componentConf.data[j] = $props[j].apply(componentConf.$this, arguments);
-                    } else {
-                        componentConf.data[j] = $props[j].apply(_config, arguments);
-                    }
+                    // 父组件向子组件传递初始化属性
+                    componentConf.data[j] = $props[j].apply(_config, arguments);
                     Object.defineProperty(componentConf.data, j, {
                         get () {
                             if (typeof $props[j] === 'function') {
-                                if (componentConf.$this) {
-                                    return $props[j].apply(componentConf.$this, arguments);
-                                } else {
-                                    return $props[j].apply(_config, arguments);
-                                }
+                                // will enter here
+                                return $props[j].apply(_config, arguments);
                             } else {
                                 return $props[j];
                             }
@@ -256,9 +251,15 @@ const CORE = function (componentConf) {
     };
 
     return dist;
-
 };
 
+const cloner = require('./utils/cloner.js');
 module.exports = function (cc) {
-    return CORE(cc);
+    let _core = CORE(cc);
+    let _f = function () {
+        return CORE(Object.clone(cc, true));
+    };
+    _f.install = _core.install;
+    _f.addTo = _core.addTo;
+    return _f;
 };
