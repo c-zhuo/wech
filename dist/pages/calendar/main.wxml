@@ -1,10 +1,10 @@
 <import src="../../wech/components/calendar/calendar.wxml" />
 
 <view class="root">
-	<view class="block">
+	<view class="cal_block">
 		<text>{{ calendarType === 1 ? '多日' : '单日' }}日历 </text>
 		<text> {{ calendarChosen }}</text>
-		<view class="button" bindtap="calendarTypeChange">点击切换单／多天</view>
+		<view class="cal_button" bindtap="calendarTypeChange">点击切换单／多天</view>
 	</view>
 	<view class="demo-part">
 		<template is="wech_calendar" data="{{ ...calen }}"/>

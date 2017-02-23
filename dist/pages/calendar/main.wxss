@@ -14,7 +14,7 @@ page {
     position: relative;
 }
 
-.button {
+.cal_button {
     padding: 2rpx 10rpx;
     border: 1px solid #d3d3d3;
     border-radius: 2rpx;
@@ -25,6 +25,6 @@ page {
     line-height: 36rpx;
 }
 
-.block {
+.cal_block {
    padding: 10rpx; 
 }

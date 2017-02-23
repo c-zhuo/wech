@@ -2,14 +2,9 @@
 <import src="../../wech/components/alert/alert.wxml" />
 
 <view class="root">
-	<view class="block">
-		<view class="button" bindtap="showMask">展示mask</view>
-	</view>
+	<view class="block" bindtap="showMask">展示mask</view>
 	<template is="wech_mask" data="{{ ...mask }}"/>
 
-	<view class="block">
-		<view class="button" bindtap="showAlert">展示alert</view>
-	</view>
+	<view class="block" bindtap="showAlert">展示alert</view>
 	<template is="wech_alert" data="{{ ...alert }}"/>
-
 </view>

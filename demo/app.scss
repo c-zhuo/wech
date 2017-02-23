@@ -1,6 +1,9 @@
 $test: 100%;
 page{
     background-color:#FAFAFA;
+    font-size: 30rpx;
+    padding-top: 25rpx;
+    padding-left: 20rpx;
 }
 .container {
     height: $test;
@@ -14,4 +17,22 @@ page{
     &-test {
         color: red;
     }
+}
+
+.block {
+    padding: 2rpx 10rpx;
+    border: 1px solid #d3d3d3;
+    border-radius: 2rpx;
+    background: #eee;
+    margin: 5rpx 10rpx;
+    font-size: 30rpx;
+    width: 240rpx;
+    display: block;
+    line-height: 36rpx;
+    text-align: center;
+}
+
+.major {
+    font-weight: bold;
+    color: black;
 }

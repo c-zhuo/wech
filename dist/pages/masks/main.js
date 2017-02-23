@@ -22,13 +22,8 @@ let pageConfig = {
         let page = this;
 
         page.setData({
-            alertText: 'alert弹出内容'
+            alertText: 'Date() is ' + new Date().getTime() 
         });
-        // setTimeout(function () {
-        //     page.setData({
-        //         alertText: ''
-        //     });
-        // }, 1000);
     },
 
 };
@@ -55,7 +50,7 @@ import alert from '../../wech/components/alert/alert.js';
 alert.install(pageConfig, {
     scope: 'alert',
     static: {
-        delay: 1000,
+        delay: 1000, // 1s后组件向外吐timeout事件
     },
     props: {
         text () {
@@ -75,6 +70,4 @@ alert.install(pageConfig, {
     }
 });
 
-
-console.log(pageConfig);
 Page(pageConfig);

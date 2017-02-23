@@ -74,6 +74,13 @@ const CORE = function (componentConf) {
             let $events = option.events || {};
             let $props = option.props || {};
             let $watch = option.watch || {};
+            if (!_config.$wechildren) {
+                _config.$wechildren = {};
+            }
+            _config.$wechildren[$scope] = {
+                $this: componentConf,
+                $wechildren: componentConf.$wechildren
+            };
 
             componentConf.$scope = option.scope;
 
@@ -89,6 +96,12 @@ const CORE = function (componentConf) {
                     data[componentConf.$scope] = componentConf.$data;
 
                     let res = _setData.apply(this, arg);
+
+// this.$wechildren[$scope].$this.data.zIndex
+// this.data[$scope].zIndex
+// this.$wechildren[$scope].$wechildren
+// this.data[$scope]
+// todo
 
                     // emit watchers
                     for (var i in this.data[$scope]) {
@@ -200,10 +213,52 @@ const CORE = function (componentConf) {
             let $static = option.static || {};
             let $events = option.events || {};
             let $props = option.props || {};
+            if (!_config.$wechildren) {
+                _config.$wechildren = {};
+            }
+            _config.$wechildren[$scope] = {
+                $this: componentConf,
+                $wechildren: componentConf.$wechildren
+            };
 
             componentConf.$scope = option.scope;
 
             _config.data[$scope] = componentConf.data;
+
+            // let _onLoad = _config.onLoad;
+            // _config.onLoad = function () {
+            //     componentConf.$this = this;
+            //     let _setData = this.setData;
+            //     this.setData = function () {
+            //         let arg = Array.prototype.slice.call(arguments);
+            //         let data = arg[0];
+
+            //         // 重新读一遍componentConf.$data（有的可能是computed到外部的），refresh组件的data
+            //         data[componentConf.$scope] = componentConf.$data;
+
+            //         let res = _setData.apply(this, arg);
+
+            //         // emit watchers
+            //         for (var i in this.data[$scope]) {
+            //             if (i === '$historyData') continue;
+            //             if (typeof this.data[$scope][i] === 'undefined') continue;
+            //             if (typeof componentConf.$data.$historyData[i] === 'undefined') continue;
+            //             if (this.data[$scope][i] !== componentConf.$data.$historyData[i]) {
+            //                 // console.log(i, 'changes to', JSON.stringify(this.data[$scope][i]), 'from', (componentConf.$data.$historyData[i]));
+            //                 componentConf.data.$historyData[i] = this.data[$scope][i];
+            //                 if (componentConf.watch && componentConf.watch[i]) {
+            //                     componentConf.watch[i].apply(componentConf, [this.data[$scope][i], ])
+            //                 }
+            //             }
+            //         }
+
+            //         return res;
+            //     };
+
+            //     if (_onLoad) {
+            //         _onLoad.apply(this, arguments);
+            //     }
+            // };
 
             for (var i in $static) {
                 componentConf.data[i] = $static[i];
@@ -238,13 +293,13 @@ const CORE = function (componentConf) {
                 }
             };
 
-            let _onLoad = _config.onLoad;
+            let _onLoad2 = _config.onLoad;
             _config.onLoad = function () {
                 // 指向parent，未必是page
                 componentConf.$this = this;
 
-                if (_onLoad) {
-                    _onLoad.apply(this, arguments);
+                if (_onLoad2) {
+                    _onLoad2.apply(this, arguments);
                 }
             };
 
@@ -269,6 +324,13 @@ const CORE = function (componentConf) {
                 }
                 _config.$addEvents[realEventName] = componentConf.events[i].bind(componentConf);
             }
+
+            // componentConf.data.$historyData = {};
+            // for (var i in componentConf.data) {
+            //     if (i === '$historyData') continue;
+            //     // componentConf.data.$historyData[i] = JSON.stringify(componentConf.data[i]);
+            //     componentConf.data.$historyData[i] = componentConf.data[i];
+            // }
         },
 
         methodScopeIndex: 0

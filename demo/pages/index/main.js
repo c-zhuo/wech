@@ -1,8 +1,6 @@
 // 微信页面配置
 let pageConfig = {
-    data: {
-        
-    },
+    data: {},
 
     goCalendar () {
         wx.navigateTo({

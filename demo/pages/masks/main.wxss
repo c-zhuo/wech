@@ -1,18 +1,2 @@
 @import "../../wech/components/mask/mask.wxss";
 @import "../../wech/components/alert/alert.wxss";
-
-page {
-	background-color: white;
-    font-size: 30rpx;
-}
-
-.button {
-    padding: 2rpx 10rpx;
-    border: 1px solid #d3d3d3;
-    border-radius: 2rpx;
-    background: #eee;
-    margin: 0 5rpx;
-    font-size: 20rpx;
-    display: inline-block;
-    line-height: 36rpx;
-}

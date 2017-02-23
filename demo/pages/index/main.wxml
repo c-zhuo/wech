@@ -1,8 +1,11 @@
 <view class="root">
-    <view bindtap="goCalendar" class="block">
-        前往日历
+    <view bindtap="goCalendar" class="block">前往日历组件</view>
+    <view class="desc">
+        演示Page与子组件的：<text class="major">静态数据传递</text>、<text class="major">单向数据绑定</text>（Page数据更新自动同步至组件）、<text class="major">组件向外反馈事件</text>。
     </view>
-    <view bindtap="goMask" class="block">
-        前往mask
+
+    <view bindtap="goMask" class="block">前往mask组件</view>
+    <view class="desc">
+        组件嵌套引用的demo。Page引用mask和alert两个组件，<text class="major">其中alert又引用了mask，两个mask的数据独立</text>。
     </view>
 </view>
