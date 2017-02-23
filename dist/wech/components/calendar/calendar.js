@@ -16,7 +16,7 @@ const conf = {
         startText: '起始',
         endText: '截止',
         chosenStart: dateFormat(new Date(), 'YYYY-MM-DD'),
-        chosenEnd: dateFormat(new Date() + 86400 * 1000 * 60, 'YYYY-MM-DD'),
+        chosenEnd: dateFormat(new Date().getTime() + 86400 * 1000 * 1, 'YYYY-MM-DD'),
         chosenFlag: 1,
         type: 1
     },

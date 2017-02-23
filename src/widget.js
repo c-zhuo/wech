@@ -53,25 +53,6 @@ const CORE = function (componentConf) {
              *  parent初始化之后，将parent的环境挂载到child的$this
              *  在child内提供微信的setData方法
              */
-
-            let _onLoad = _config.onLoad;
-            _config.onLoad = function () {
-                componentConf.$this = this;
-
-                let _setData = this.setData;
-                this.setData = function () {
-                    let arg = Array.prototype.slice.call(arguments);
-                    let data = arg[0];
-                    data[componentConf.$scope] = componentConf.$data;
-                    let res = _setData.apply(this, arg);
-                    return res;
-                };
-
-                if (_onLoad) {
-                    _onLoad.apply(this, arguments);
-                }
-            };
-
             lifeCycle.forEach(function (cyc) {
                 bindingLifeCycle(_config, componentConf, cyc);
             });
@@ -92,8 +73,44 @@ const CORE = function (componentConf) {
             let $static = option.static || {};
             let $events = option.events || {};
             let $props = option.props || {};
+            let $watch = option.watch || {};
 
             componentConf.$scope = option.scope;
+
+            let _onLoad = _config.onLoad;
+            _config.onLoad = function () {
+                componentConf.$this = this;
+                let _setData = this.setData;
+                this.setData = function () {
+                    let arg = Array.prototype.slice.call(arguments);
+                    let data = arg[0];
+
+                    // 重新读一遍componentConf.$data（有的可能是computed到外部的），refresh组件的data
+                    data[componentConf.$scope] = componentConf.$data;
+
+                    let res = _setData.apply(this, arg);
+
+                    // emit watchers
+                    for (var i in this.data[$scope]) {
+                        if (i === '$historyData') continue;
+                        if (typeof this.data[$scope][i] === 'undefined') continue;
+                        if (typeof componentConf.$data.$historyData[i] === 'undefined') continue;
+                        if (this.data[$scope][i] !== componentConf.$data.$historyData[i]) {
+                            // console.log(i, 'changes to', JSON.stringify(this.data[$scope][i]), 'from', (componentConf.$data.$historyData[i]));
+                            componentConf.data.$historyData[i] = this.data[$scope][i];
+                            if (componentConf.watch && componentConf.watch[i]) {
+                                componentConf.watch[i].apply(componentConf, [this.data[$scope][i], ])
+                            }
+                        }
+                    }
+
+                    return res;
+                };
+
+                if (_onLoad) {
+                    _onLoad.apply(this, arguments);
+                }
+            };
 
             dist.init(_config);
 
@@ -166,6 +183,13 @@ const CORE = function (componentConf) {
             }
             for (var i in componentConf.$addEvents) {
                 _config[i] = componentConf.$addEvents[i].bind(componentConf);
+            }
+
+            componentConf.data.$historyData = {};
+            for (var i in componentConf.data) {
+                if (i === '$historyData') continue;
+                // componentConf.data.$historyData[i] = JSON.stringify(componentConf.data[i]);
+                componentConf.data.$historyData[i] = componentConf.data[i];
             }
 
             return _config;

@@ -24,11 +24,11 @@ let pageConfig = {
         page.setData({
             alertText: 'alert弹出内容'
         });
-        setTimeout(function () {
-            page.setData({
-                alertText: ''
-            });
-        }, 1000);
+        // setTimeout(function () {
+        //     page.setData({
+        //         alertText: ''
+        //     });
+        // }, 1000);
     },
 
 };
@@ -55,7 +55,7 @@ import alert from '../../wech/components/alert/alert.js';
 alert.install(pageConfig, {
     scope: 'alert',
     static: {
-        delay: 2500,
+        delay: 1000,
     },
     props: {
         text () {
@@ -64,6 +64,13 @@ alert.install(pageConfig, {
         visible () {
             // 这里直接用alertText是否为空代表是否展示了，使用时可自行调整
             return this.data.alertText;
+        },
+    },
+    events: {
+        timeout: function () {
+            this.setData({
+                alertText: ''
+            });
         },
     }
 });

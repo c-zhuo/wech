@@ -7,6 +7,18 @@ const conf = {
         visible: false,
         text: '',
         delay: 0,
+    },
+
+    watch: {
+        visible (newVal) {
+            let that = this;
+
+            if (newVal && that.data.delay) {
+                setTimeout(function () {
+                    that.$emit('timeout');
+                }, that.data.delay * 1);
+            }
+        }
     }
 };
 
