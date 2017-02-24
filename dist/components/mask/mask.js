@@ -15,13 +15,7 @@ const conf = {
 
             this.$emit('clickingMask');
         }
-    },
-
-    // watch: {
-    //     visible (a) {
-    //         console.log('watching', a)
-    //     }
-    // }
+    }
 };
 
 module.exports = widget(conf);

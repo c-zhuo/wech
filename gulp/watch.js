@@ -1,9 +1,9 @@
 module.exports = function (gulp) {
     gulp.task('watch', ['build'], function () {
         gulp.watch('./demo/**/*.*', ['build']);
-        gulp.watch('./src/**/*.js', ['wech', 'build']);
-        gulp.watch('./src/**/*.scss', ['wech', 'build']);
-        gulp.watch('./src/**/*.wxml', ['wech', 'build']);
-        gulp.watch('./src/**/*.json', ['wech', 'build']);
+        gulp.watch('./dist/**/*.js', ['wech', 'build']);
+        gulp.watch('./dist/**/*.scss', ['wech', 'build']);
+        gulp.watch('./dist/**/*.wxml', ['wech', 'build']);
+        gulp.watch('./dist/**/*.json', ['wech', 'build']);
     });
 };

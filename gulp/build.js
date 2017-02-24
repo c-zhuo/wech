@@ -1,4 +1,4 @@
-var DIST_PATH = './dist';
+var DIST_PATH = './wechat-ide-binding-directory';
 
 var webpack = require('webpack');
 var fs = require('fs');
@@ -46,7 +46,7 @@ module.exports = function (gulp) {
                 return false;
             }
         });
-        gulp.src('./src/**/*.scss')
+        gulp.src('./dist/**/*.scss')
             .pipe(f)
             .pipe(sass.sync({
                     outputStyle: 'compressed'
@@ -81,7 +81,7 @@ module.exports = function (gulp) {
 
     gulp.task('wech-css2wxss', ['sass'], function () {
         var fileList = [];
-        walk(fileList, './src');
+        walk(fileList, './dist');
         fileList.forEach(function (filePath) {
             if (filePath.match(/\.scss$/)) {
                 var oldWxss = filePath.substring(0, filePath.length - 4) + 'wxss';
@@ -91,7 +91,7 @@ module.exports = function (gulp) {
             }
         });
         fileList = [];
-        walk(fileList, './src');
+        walk(fileList, './dist');
         fileList.forEach(function (filePath) {
             if (filePath.match(/\.css$/)) {
                 // 判断是否存在对应的wxml文件，如果不存在，则可以移除当前css文件
@@ -113,7 +113,7 @@ module.exports = function (gulp) {
             } else if (filePath.match(/\.css$/)) {
                 // 判断是否存在对应的wxml文件，如果不存在，则可以移除当前css文件
                 if (fileList.indexOf(filePath.substring(0, filePath.length - 3) + 'wxml') === -1
-                    && filePath !== './dist/app.css') {
+                    && filePath !== DIST_PATH + '/app.css') {
                     fs.unlinkSync(filePath);
                 } else {
                     fs.rename(filePath, filePath.substring(0, filePath.length - 3) + 'wxss');
@@ -129,7 +129,7 @@ module.exports = function (gulp) {
 
     gulp.task('copy-dir', function (cb) {
         copydir.sync('./demo', DIST_PATH);
-        copydir.sync('./src', DIST_PATH + '/wech');
+        copydir.sync('./dist', DIST_PATH + '/wech');
         cb();
     });
 

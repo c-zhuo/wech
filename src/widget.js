@@ -1,22 +1,34 @@
-/**
- *  模块化组件maker
+/*
+ *  WECH (Wechat Component Helper)
+ *  - 极轻量（9kb）的微信小程序模块化组件开发工具
+ *  - 没有任何构建相关的骨架或者约束
+ *  - 在运行阶段自动通过getter/setter，将你的“模块化组件”的数据和方法的映射到小程序的实际页面
+ *  - 支持组件嵌套、防止方法名污染、单向数据绑定
+ *
  *  Author: chenzhuo04@meituan.com
- *  Npm: https://www.npmjs.com/package/wech
- *  Npm-Downloads: https://npm-stat.com/charts.html?package=wech&from=2017-02-15&to=2017-02-23
+ *  
+ *  Licensed under the MIT license.
+ *  http://www.opensource.org/licenses/mit-license.php
+ *
  */
 
+const lifeCycle = ['onLoad', 'onShow', 'onReady', 'onHide', 'onUnload'];
+
+// 获取深层数据
+const getDeepData = function (_root, _tree) {
+    let res = _root;
+    _tree.forEach(function (item) {
+        res = res[item];
+    });
+    return res;
+};
+
 const CORE = function (componentConf) {
+
     /**
      *  组件的生命周期函数挂载到Page的生命周期上
-     *
-     *  备注：
-     *      先触发页面的生命周期钩子，再触发组件的生命周期钩子
-     *      Vue的方式是 $parent.created -> $child.created -> $child.ready -> $parent.ready
-     *      但是官方demo没有created状态，所以只好先按照 $parent.onLoad -> $child.onLoad
-     *      微信文档中明确提出的“生命周期函数”只有5个，start、created等状态没有官方demo，先不考虑
+     *  先触发页面的生命周期钩子，再触发组件的生命周期钩子
      */
-
-    const lifeCycle = ['onLoad', 'onShow', 'onReady', 'onHide', 'onUnload'];
 
     const bindingLifeCycle = function (conf, component, eve) {
         let oEve = conf[eve];
@@ -94,31 +106,37 @@ const CORE = function (componentConf) {
                     let arg = Array.prototype.slice.call(arguments);
                     let data = arg[0];
 
-                    // 重新读一遍componentConf.$data（有的可能是computed到外部的），refresh组件的data
+                    // Reload componentConf.$data(will update computed data), for refreshing component's data
                     data[componentConf.$scope] = componentConf.$data;
 
                     let res = _setData.apply(this, arg);
 
-                    // TODO：实现多级watch逻辑
-                    // debugger;
-                    // this.$wechildren[$scope].$this.data.zIndex
-                    // this.data[$scope].zIndex
-                    // this.$wechildren[$scope].$wechildren
-                    // this.data[$scope]
+                    let _page = this;
+                    let looper = function (deepth) {
+                        let _scope = this;
 
-                    // 触发一级组件的watch
-                    for (var i in this.data[$scope]) {
-                        if (i === '$historyData') continue;
-                        if (typeof this.data[$scope][i] === 'undefined') continue;
-                        if (typeof componentConf.$data.$historyData[i] === 'undefined') continue;
-                        if (this.data[$scope][i] !== componentConf.$data.$historyData[i]) {
-                            // console.log(i, 'changes to', JSON.stringify(this.data[$scope][i]), 'from', (componentConf.$data.$historyData[i]));
-                            componentConf.data.$historyData[i] = this.data[$scope][i];
-                            if (componentConf.watch && componentConf.watch[i]) {
-                                componentConf.watch[i].apply(componentConf, [this.data[$scope][i], ])
+                        for (var i in _scope.$this.data) {
+
+                            // 子组件的数据不在此时检测变化，在子组件的looper内再检测，此时i是一个scope名
+                            if (_scope.$wechildren && _scope.$wechildren[i]) {
+                                continue;
+                            }
+
+                            let trueData = getDeepData(_page.data, deepth.concat())[i];
+                            let configData = _scope.$this.data[i];
+                            if (JSON.stringify(trueData) !== JSON.stringify(configData)) {
+                                _scope.$this.data[i] = trueData;
+                                if (_scope.$this.watch && _scope.$this.watch[i]) {
+                                    _scope.$this.watch[i].apply(_scope.$this, [trueData, configData])
+                                }
                             }
                         }
-                    }
+                        for (var i in _scope.$wechildren) {
+                            looper.apply(_scope.$wechildren[i], [deepth.concat(i)]);
+                        }
+                    };
+
+                    looper.apply(this.$wechildren[$scope], [[$scope]]);
 
                     return res;
                 };
@@ -201,13 +219,6 @@ const CORE = function (componentConf) {
                 _config[i] = componentConf.$addEvents[i].bind(componentConf);
             }
 
-            componentConf.data.$historyData = {};
-            for (var i in componentConf.data) {
-                if (i === '$historyData') continue;
-                // componentConf.data.$historyData[i] = JSON.stringify(componentConf.data[i]);
-                componentConf.data.$historyData[i] = componentConf.data[i];
-            }
-
             return _config;
         },
 
@@ -227,41 +238,6 @@ const CORE = function (componentConf) {
             componentConf.$scope = option.scope;
 
             _config.data[$scope] = componentConf.data;
-
-            // let _onLoad = _config.onLoad;
-            // _config.onLoad = function () {
-            //     componentConf.$this = this;
-            //     let _setData = this.setData;
-            //     this.setData = function () {
-            //         let arg = Array.prototype.slice.call(arguments);
-            //         let data = arg[0];
-
-            //         // 重新读一遍componentConf.$data（有的可能是computed到外部的），refresh组件的data
-            //         data[componentConf.$scope] = componentConf.$data;
-
-            //         let res = _setData.apply(this, arg);
-
-            //         // emit watchers
-            //         for (var i in this.data[$scope]) {
-            //             if (i === '$historyData') continue;
-            //             if (typeof this.data[$scope][i] === 'undefined') continue;
-            //             if (typeof componentConf.$data.$historyData[i] === 'undefined') continue;
-            //             if (this.data[$scope][i] !== componentConf.$data.$historyData[i]) {
-            //                 // console.log(i, 'changes to', JSON.stringify(this.data[$scope][i]), 'from', (componentConf.$data.$historyData[i]));
-            //                 componentConf.data.$historyData[i] = this.data[$scope][i];
-            //                 if (componentConf.watch && componentConf.watch[i]) {
-            //                     componentConf.watch[i].apply(componentConf, [this.data[$scope][i], ])
-            //                 }
-            //             }
-            //         }
-
-            //         return res;
-            //     };
-
-            //     if (_onLoad) {
-            //         _onLoad.apply(this, arguments);
-            //     }
-            // };
 
             for (var i in $static) {
                 componentConf.data[i] = $static[i];
@@ -327,13 +303,6 @@ const CORE = function (componentConf) {
                 }
                 _config.$addEvents[realEventName] = componentConf.events[i].bind(componentConf);
             }
-
-            // componentConf.data.$historyData = {};
-            // for (var i in componentConf.data) {
-            //     if (i === '$historyData') continue;
-            //     // componentConf.data.$historyData[i] = JSON.stringify(componentConf.data[i]);
-            //     componentConf.data.$historyData[i] = componentConf.data[i];
-            // }
         },
 
         methodScopeIndex: 0
@@ -342,7 +311,16 @@ const CORE = function (componentConf) {
     return dist;
 };
 
-(function() {
+/*
+ * $Id: object-clone.js,v 0.41 2013/03/27 18:29:04 dankogai Exp dankogai $
+ *
+ *  Licensed under the MIT license.
+ *  http://www.opensource.org/licenses/mit-license.php
+ *
+ */
+
+(function(global) {
+    'use strict';
     if (!Object.freeze || typeof Object.freeze !== 'function') {
         throw Error('ES5 support required');
     }
@@ -558,7 +536,9 @@ const CORE = function (componentConf) {
         isnt: isnt,
         equals: equals
     }));
-})();
+})(this);
+
+/* exports */
 
 module.exports = function (cc) {
     let _core = CORE(cc);

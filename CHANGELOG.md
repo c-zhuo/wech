@@ -2,9 +2,10 @@
 
 ## Changelog
 
-### next version
+### 0.2.0（2017.2.24）
 
-组件支持watch方法，监听属性变化
+组件支持watch方法，监听属性变化（触发时机为Page.setData开始时，watch不会引起多次setData）
+调整目录结构，dist为wech输出目录，wechat-ide-binding-directory为小程序开发工具绑定目录
 
 ### 0.1.6（2017.2.24）
 
