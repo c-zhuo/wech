@@ -96,7 +96,7 @@ const CORE = function (componentConf) {
                     data[componentConf.$scope] = componentConf.$data;
 
                     let res = _setData.apply(this, arg);
-
+debugger;
 // this.$wechildren[$scope].$this.data.zIndex
 // this.data[$scope].zIndex
 // this.$wechildren[$scope].$wechildren
