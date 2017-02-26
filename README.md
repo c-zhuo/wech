@@ -32,7 +32,6 @@
 2.开发组件时：
 
 ```
-
 import wech from 'yourPath/widget.js';
 
 const yourConfig = {
@@ -60,7 +59,6 @@ const yourConfig = {
 };
 
 module.exports = wech(yourConfig);
-
 ```
 
 其中，可以通过 this.data.district / this.yourComponentMethod 访问组件内部的数据和方法，通过 this.setData 更新组件内部的数据，通过 this.$emit('eventName', data) 向外传递事件。模版中可以通过 bindtap="{{ yourComponentEvent }}" 来触发组件内部方法，防止全局事件名污染。
@@ -68,7 +66,6 @@ module.exports = wech(yourConfig);
 3.引入组件时，通过install／addTo方法。install用于将组件挂载到页面，addTo用于将组件作为子组件，挂载到另一个组件内部：
 
 ```
-
 import child1 from '../components/foo.js';
 const pageConfig = { 微信页面配置 };
 
@@ -93,19 +90,15 @@ child1.install(pageConfig, {
 });
 
 Page(pageConfig);
-
 ```
 
 addTo同理，如下：
 
 ```
-
 import wech from 'yourPath/widget.js';
-
 import grandson from 'your Grand Component';
 
 var conf = {}; // 子组件
-
 grandson.addTo(conf, {
     scope: 'grandson',
     static: {},
@@ -115,7 +108,6 @@ grandson.addTo(conf, {
 });
 
 module.exports = widget(conf);
-
 ```
 
 备注：这样挂载的是组件自身，如果同一组件同时用于页面多次，可以使用foo().install／foo().addTo进行实例化，避免引起冲突。foo()会立即创建一个foo的实例。
