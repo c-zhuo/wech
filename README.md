@@ -2,8 +2,8 @@
 
 ## 微信小程序模块化组件开发“框架”
 
-<img width="300" src="https://raw.githubusercontent.com/chenzhuo1992/wech/master/screenshots/1.png">
-<img width="197" src="https://raw.githubusercontent.com/chenzhuo1992/wech/master/screenshots/2.png">
+<img width="405" src="https://raw.githubusercontent.com/chenzhuo1992/wech/master/screenshots/1.png">
+<img width="265" src="https://raw.githubusercontent.com/chenzhuo1992/wech/master/screenshots/2.png">
 
 更新日志：[Changelog](https://github.com/chenzhuo1992/wech/blob/master/CHANGELOG.md) 
 
