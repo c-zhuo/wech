@@ -1,6 +1,6 @@
 {
   "name": "wech",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "微信小程序模块化组件开发工具，轻量、兼容其他框架。Wechat Component Helper",
   "main": "dist/widget.js",
   "scripts": {
@@ -10,40 +10,26 @@
   "dependencies": {
   },
   "devDependencies": {
-    "babel-core": "6.*",
-    "babel-loader": "6.*",
-    "babel-plugin-add-module-exports": "0.2.*",
-    "babel-plugin-transform-object-assign": "6.*",
-    "babel-preset-es2015": "6.*",
-    "babel-runtime": "6.*",
     "copy-dir": "^0.3.0",
-    "css-loader": "0.23.*",
-    "ejs-compiled-loader": "2.*",
-    "eslint": "2.*",
-    "eslint-config-hfe": "2.*",
     "file-loader": "0.9.*",
     "glob": "7.*",
     "gulp": "3.*",
     "gulp-eslint": "2.*",
     "gulp-filter": "^4.0.0",
     "gulp-sass": "^2.3.2",
-    "html-webpack-plugin": "2.*",
     "node-sass": "3.*",
-    "pre-commit": "1.*",
-    "progress-bar-webpack-plugin": "1.*",
-    "sass-loader": "4.*",
-    "webpack": "1.*",
-    "webpack-dev-server": "1.*"
+    "sass-loader": "4.*"
   },
   "files": [
     "wechat-ide-binding-directory",
-    "src",
+    "dist",
     "gulp"
   ],
+  "homepage": "https://github.com/chenzhuo1992/wech#readme",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git@github.com:chenzhuo1992/wech.git"
   },
   "author": "chenzhuo04@meituan.com",
-  "license": "ISC"
+  "license": "MIT"
 }

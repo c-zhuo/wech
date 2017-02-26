@@ -1,6 +1,5 @@
 var DIST_PATH = './wechat-ide-binding-directory';
 
-var webpack = require('webpack');
 var fs = require('fs');
 var sass = require('gulp-sass');
 var copydir = require('copy-dir');

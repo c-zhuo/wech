@@ -2,14 +2,17 @@
 
 ## 微信小程序模块化组件开发“框架”
 
-![https://raw.githubusercontent.com/chenzhuo1992/wech/master/screenshots/1.png](https://raw.githubusercontent.com/chenzhuo1992/wech/master/screenshots/1.png)
-![https://raw.githubusercontent.com/chenzhuo1992/wech/master/screenshots/2.png](https://raw.githubusercontent.com/chenzhuo1992/wech/master/screenshots/2.png)
+<img width="300" src="https://raw.githubusercontent.com/chenzhuo1992/wech/master/screenshots/1.png">
+<img width="197" src="https://raw.githubusercontent.com/chenzhuo1992/wech/master/screenshots/1.png">
 
 更新日志：[Changelog](https://github.com/chenzhuo1992/wech/blob/master/CHANGELOG.md) 
 
-极轻量（9kb）的微信小程序模块化组件开发工具，没有任何构建相关的骨架或者约束。在运行阶段自动通过getter/setter，将你的“模块化组件”的数据和方法的映射到小程序的实际页面。支持组件嵌套、防止方法名污染、单向数据绑定、监听数据变化。
+用途：使小程序开发可以采用模块化的开发方式。没有任何构建相关的骨架或者约束。在运行阶段自动通过getter/setter，将你的“模块化组件”的数据和方法的映射到小程序的实际页面。支持组件嵌套、防止方法名污染、单向数据绑定、监听数据变化。
 
-对wxss、wxml无任何新增语法规则，最大程度地避免引入沉重的轮子，防止小程序官方框架迭代产生的二次成本。
+优势：
+1.极轻量：9kb，无论开发还是打包。
+2.多兼容：同一版本兼容安卓／ios／开发工具。由于只有js，wech也兼容部分其它框架。
+3.低成本：无构建要求、无依赖。本身只有一个js文件，可以copy到你的项目直接来用，引入成本极低。对wxss、wxml无任何新增语法规则，最大程度地避免引入沉重的轮子，防止小程序官方迭代导致的项目改动成本。
 
 ### 查看demo
 
@@ -27,7 +30,7 @@
 
 ```
 
-import wech from 'yourPath/widget.js'; // 可以npm引入的话
+import wech from 'yourPath/widget.js';
 
 const yourConfig = {
     data: {
@@ -63,11 +66,12 @@ module.exports = wech(yourConfig);
 
 ```
 
-import child1 from 'child1';
+import child1 from '../components/foo.js';
 const pageConfig = { 微信页面配置 };
 
 child1.install(pageConfig, {
-    scope: '这里的名字需要和<template is="component1" data="{{...scope1}}"></template>里面的scope1相符',
+    // scope需要和<template is="child1name" data="{{...c1}}"></template>里面的data相符，wech会自动映射组件数据和方法
+    scope: 'c1',
     static: {
         age: 25, // 传递给组件的静态参数，一般用于初始化、配置等，组件内部仍可以修改传入的参数（无绑定）
     },

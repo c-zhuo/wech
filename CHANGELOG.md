@@ -2,6 +2,14 @@
 
 ## Changelog
 
+### 0.2.2（2017.2.26）
+
+移除无用依赖，调整readme
+
+### 0.2.1（2017.2.25）
+
+package.json的bugfix
+
 ### 0.2.0（2017.2.24）
 
 组件支持watch方法，监听属性变化（触发时机为Page.setData开始时，watch不会引起多次setData）
