@@ -21,9 +21,7 @@
     "sass-loader": "4.*"
   },
   "files": [
-    "wechat-ide-binding-directory",
-    "dist",
-    "gulp"
+    "dist"
   ],
   "homepage": "https://github.com/chenzhuo1992/wech#readme",
   "repository": {
